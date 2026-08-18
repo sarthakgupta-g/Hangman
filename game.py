@@ -14,21 +14,31 @@ for i in range(len(word)):
 while game:
     guess = input("Enter a letter: ")
     match = False
+    guessed=False
 
-    for i in range(len(word)):
-        if word[i] == guess:
-            hidden[i] = guess
-            match = True
+    for x in guessed_letters:
+        if (guess==x):
+            guessed=True
 
-    if match == False:
-        print("Incorrect!")
-        lives -= 1
+    if (guessed==True):
+        print("You have already guessed this. Try another letter")
 
-    if lives == 0:
-        game = False
-        print(f"Game lost! Correct word is {word}")
-    elif word == "".join(hidden):
-        game = False
-        print("You win!")
+    else:
+        guessed_letters.append(guess)
+        for i in range(len(word)):
+            if word[i] == guess:
+                hidden[i] = guess
+                match = True
+
+        if match == False:
+            print("Incorrect!")
+            lives -= 1
+
+        if lives == 0:
+            game = False
+            print(f"Game lost! Correct word is {word}")
+        elif word == "".join(hidden):
+            game = False
+            print("You win!")
 
     print("".join(hidden))
